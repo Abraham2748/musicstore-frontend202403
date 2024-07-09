@@ -6,7 +6,8 @@
     "start": "ng serve --open",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng deploy --repo https://github.com/Abraham2748/musicstore-frontend202403 --base-href https://abraham2748.github.io/musicstore-frontend202403/"
   },
   "private": true,
   "dependencies": {

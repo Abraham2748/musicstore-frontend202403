@@ -1,13 +1,16 @@
 {
   "name": "musical-events",
   "version": "0.0.0",
+  "config": {
+    "baseHref": "https://abraham2748.github.io/musicstore-frontend202403/"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "deploy": "ng deploy --repo https://github.com/Abraham2748/musicstore-frontend202403 --base-href https://abraham2748.github.io/musicstore-frontend202403/"
+    "deploy": "ng deploy --remote origin --base-href %npm_package_config_baseHref%"
   },
   "private": true,
   "dependencies": {

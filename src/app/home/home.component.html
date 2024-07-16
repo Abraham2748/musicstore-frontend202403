@@ -5,22 +5,18 @@
       <mat-form-field>
         <mat-label>Género</mat-label>
         <mat-select>
-          <mat-option value="">Rock</mat-option>
-          <mat-option value="">Salsa</mat-option>
-          <mat-option value="">Bachata</mat-option>
+          <mat-option [value]="genreTest1.id">{{ genreTest1.name }}</mat-option>
+          <mat-option [value]="genreTest2.id">{{ genreTest2.name }}</mat-option>
+          <mat-option [value]="genreTest3.id">{{ genreTest3.name }}</mat-option>
         </mat-select>
       </mat-form-field>
       <span>Selecciona tu género musical favorito</span>
     </section>
     <section class="event-list">
-      <app-event-card></app-event-card>
-      <app-event-card></app-event-card>
-      <app-event-card></app-event-card>
-      <app-event-card></app-event-card>
-      <app-event-card></app-event-card>
-      <app-event-card></app-event-card>
-      <app-event-card></app-event-card>
-      <app-event-card></app-event-card>
+      <app-event-card [data]="concertTest1"></app-event-card>
+      <app-event-card [data]="concertTest2"></app-event-card>
+      <app-event-card [data]="concertTest3"></app-event-card>
+      <app-event-card [data]="concertTest4"></app-event-card>
     </section>
   </div>
   <app-footer></app-footer>

@@ -9,14 +9,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    HomeComponent,
-    LoginComponent,
-    RegisterComponent,
-    ForgotPasswordComponent,
-    EventDetailComponent,
-    RouterOutlet,
-  ],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

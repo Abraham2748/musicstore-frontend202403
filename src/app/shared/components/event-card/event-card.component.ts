@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Concert, emptyConcert } from '../../models/concert.model';
 
 @Component({
   selector: 'app-event-card',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './event-card.component.html',
   styleUrl: './event-card.component.css',
 })
-export class EventCardComponent {}
+export class EventCardComponent {
+  @Input({ required: true }) data!: Concert;
+}

@@ -7,7 +7,7 @@ import { EventCardComponent } from '../shared/components/event-card/event-card.c
 import { HomeService } from './home.service';
 import { Concert } from '../shared/models/concert.model';
 import { Genre } from '../shared/models/genre.model';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { HighlightableDirective } from '../shared/directives/highlightable.directive';
 
 @Component({
@@ -19,6 +19,7 @@ import { HighlightableDirective } from '../shared/directives/highlightable.direc
     MatFormFieldModule,
     MatSelectModule,
     EventCardComponent,
+    NgIf,
     NgFor,
     HighlightableDirective,
   ],

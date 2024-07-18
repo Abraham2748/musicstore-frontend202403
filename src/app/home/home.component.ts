@@ -8,6 +8,7 @@ import { HomeService } from './home.service';
 import { Concert } from '../shared/models/concert.model';
 import { Genre } from '../shared/models/genre.model';
 import { NgFor } from '@angular/common';
+import { HighlightableDirective } from '../shared/directives/highlightable.directive';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,7 @@ import { NgFor } from '@angular/common';
     MatSelectModule,
     EventCardComponent,
     NgFor,
+    HighlightableDirective,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',

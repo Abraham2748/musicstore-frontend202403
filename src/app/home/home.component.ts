@@ -5,8 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { EventCardComponent } from '../shared/components/event-card/event-card.component';
 import { HomeService } from './home.service';
-import { Concert, emptyConcert } from '../shared/models/concert.model';
-import { Genre, emptyGenre } from '../shared/models/genre.model';
+import { Concert } from '../shared/models/concert.model';
+import { Genre } from '../shared/models/genre.model';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ import { Genre, emptyGenre } from '../shared/models/genre.model';
     MatFormFieldModule,
     MatSelectModule,
     EventCardComponent,
+    NgFor,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
@@ -24,25 +26,13 @@ import { Genre, emptyGenre } from '../shared/models/genre.model';
 export class HomeComponent implements OnInit {
   homeService = inject(HomeService);
 
-  concertTest1: Concert = emptyConcert;
-  concertTest2: Concert = emptyConcert;
-  concertTest3: Concert = emptyConcert;
-  concertTest4: Concert = emptyConcert;
-
-  genreTest1: Genre = emptyGenre;
-  genreTest2: Genre = emptyGenre;
-  genreTest3: Genre = emptyGenre;
+  concerts: Concert[] = [];
+  genres: Genre[] = [];
 
   ngOnInit() {
     this.homeService.getData().subscribe((response) => {
-      this.concertTest1 = response.concerts[0];
-      this.concertTest2 = response.concerts[1];
-      this.concertTest3 = response.concerts[2];
-      this.concertTest4 = response.concerts[3];
-
-      this.genreTest1 = response.genres[0];
-      this.genreTest2 = response.genres[1];
-      this.genreTest3 = response.genres[2];
+      this.concerts = response.concerts;
+      this.genres = response.genres;
     });
   }
 }

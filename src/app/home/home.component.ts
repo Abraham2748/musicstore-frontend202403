@@ -7,8 +7,9 @@ import { EventCardComponent } from '../shared/components/event-card/event-card.c
 import { HomeService } from './home.service';
 import { Concert } from '../shared/models/concert.model';
 import { Genre } from '../shared/models/genre.model';
-import { NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { HighlightableDirective } from '../shared/directives/highlightable.directive';
+import { map, Observable, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ import { HighlightableDirective } from '../shared/directives/highlightable.direc
     NgIf,
     NgFor,
     HighlightableDirective,
+    AsyncPipe,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
@@ -29,13 +31,13 @@ import { HighlightableDirective } from '../shared/directives/highlightable.direc
 export class HomeComponent implements OnInit {
   homeService = inject(HomeService);
 
-  concerts: Concert[] = [];
-  genres: Genre[] = [];
+  concerts$ = new Observable<Concert[]>();
+  genres$ = new Observable<Genre[]>();
 
   ngOnInit() {
-    this.homeService.getData().subscribe((response) => {
-      this.concerts = response.concerts;
-      this.genres = response.genres;
-    });
+    const data$ = this.homeService.getData().pipe(shareReplay());
+
+    this.concerts$ = data$.pipe(map((response) => response.concerts));
+    this.genres$ = data$.pipe(map((response) => response.genres));
   }
 }

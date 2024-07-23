@@ -5,7 +5,7 @@
       <mat-form-field>
         <mat-label>Género</mat-label>
         <mat-select>
-          @for(genre of genres; track genre.id) {
+          @for(genre of genres$ | async; track genre.id) {
           <mat-option [value]="genre.id">{{ genre.name }}</mat-option>
           } @empty { No hay géneros disponibles }
         </mat-select>
@@ -13,7 +13,7 @@
       <span>Selecciona tu género musical favorito</span>
     </section>
     <section class="event-list">
-      @for(concert of concerts; track concert.id){
+      @for(concert of concerts$ | async; track concert.id){
       <app-event-card appHighlightable [data]="concert"></app-event-card>
       }@empty { No hay conciertos disponibles }
     </section>

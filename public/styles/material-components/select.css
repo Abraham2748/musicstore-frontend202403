@@ -1,5 +1,4 @@
 :root {
-  /* Override color variables*/
   --mat-select-enabled-trigger-text-color: white;
   --mat-option-label-text-color: var(--primary-color);
   --mat-select-panel-background-color: var(--secondary-color);

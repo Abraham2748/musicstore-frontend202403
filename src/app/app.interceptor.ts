@@ -1,7 +1,8 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject, isDevMode } from '@angular/core';
-import { tap } from 'rxjs';
+import { finalize, tap } from 'rxjs';
 import { AuthService } from './shared/services/auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 export const loggerInterceptor: HttpInterceptorFn = (req, next) => {
   if (isDevMode()) {
@@ -24,4 +25,19 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
     });
   }
   return next(clonedRequest);
+};
+
+export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
+  console.log('Loading interceptor');
+  const spinner = inject(NgxSpinnerService);
+  return next(req).pipe(
+    tap(() => {
+      console.log('Loading initiated');
+      spinner.show();
+    }),
+    finalize(() => {
+      console.log('Loading completed');
+      spinner.hide();
+    })
+  );
 };

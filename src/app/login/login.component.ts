@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../shared/services/auth.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +40,7 @@ export class LoginComponent {
 
   authService = inject(AuthService);
   router = inject(Router);
+  notifications = inject(NotificationsService);
 
   login() {
     const email = this.loginForm.controls.email.value!;
@@ -47,13 +49,16 @@ export class LoginComponent {
       if (response && response.success) {
         localStorage.setItem('token', response.data.token);
         this.authService.loggedIn.set(true);
-        alert('Login Exitoso' + '\n' + 'Bienvenido a Musical Events');
+        this.notifications.success(
+          'Login Exitoso',
+          'Bienvenido a Musical Events'
+        );
         const isAdministrator = email === 'admin@gmail.com';
         this.authService.isAdministrator.set(isAdministrator);
         localStorage.setItem('isAdministrator', isAdministrator.toString());
         this.router.navigate([isAdministrator ? '/admin' : '/customer']);
       } else {
-        alert('Login Fallido' + '\n' + 'Revisa tus credenciales');
+        this.notifications.warn('Login Fallido', 'Revisa tus credenciales');
       }
     });
   }

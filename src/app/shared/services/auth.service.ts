@@ -10,6 +10,7 @@ import {
   RegisterRequestBody,
 } from '../models/auth.model';
 import { Observable, catchError, of } from 'rxjs';
+import { NotificationsService } from 'angular2-notifications';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,8 @@ export class AuthService {
   private baseUrl = environment.baseUrl;
   loggedIn = signal(false);
   isAdministrator = signal(false);
+
+  notifications = inject(NotificationsService);
 
   login(email: string, password: string): Observable<LoginApiResponse> {
     const apiUrl = this.baseUrl + '/api/users/login';
@@ -38,7 +41,7 @@ export class AuthService {
     localStorage.clear();
     this.loggedIn.set(false);
     this.isAdministrator.set(false);
-    alert('Logout exitoso' + '\n' + 'Hasta luego');
+    this.notifications.success('Logout exitoso', 'Hasta luego');
   }
 
   verifyLocalStorage() {

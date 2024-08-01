@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BuyService } from '../services/buy.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-buy-dialog',
@@ -25,6 +26,7 @@ export class BuyDialogComponent {
   data = inject(MAT_DIALOG_DATA) as Concert;
   buyService = inject(BuyService);
   matDialogRef = inject(MatDialogRef);
+  notifications = inject(NotificationsService);
 
   buyTickets(quantity: number) {
     this.buyService
@@ -33,7 +35,7 @@ export class BuyDialogComponent {
         if (response.success) {
           this.matDialogRef.close(response.data);
         } else {
-          alert(response.errorMessage);
+          this.notifications.error('Error', response.errorMessage);
         }
       });
   }

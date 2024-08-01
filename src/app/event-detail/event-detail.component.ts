@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { BuyDialogComponent } from './buy-dialog/buy-dialog.component';
 import { VoucherDialogComponent } from '../shared/components/voucher-dialog/voucher-dialog.component';
 import { AuthService } from '../shared/services/auth.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-event-detail',
@@ -38,6 +39,8 @@ export class EventDetailComponent implements OnInit {
 
   concertData: Concert | undefined;
 
+  notifications = inject(NotificationsService);
+
   ngOnInit() {
     this.eventId = this.activatedRoute.snapshot.paramMap.get('id')!;
     this.data$ = this.eventDetailService.getData(this.eventId).pipe(
@@ -50,17 +53,17 @@ export class EventDetailComponent implements OnInit {
 
   openDialog() {
     if (!this.authService.loggedIn()) {
-      alert(
-        'Inicia sesión' + '\n' + 'Debes iniciar sesión para comprar entradas'
+      this.notifications.warn(
+        'Inicia sesión',
+        'Debes iniciar sesión para comprar entradas'
       );
       this.router.navigate(['/login']);
       return;
     }
     if (this.authService.isAdministrator()) {
-      alert(
-        'No autorizado' +
-          '\n' +
-          'No puedes comprar entradas siendo administrador'
+      this.notifications.warn(
+        'No autorizado',
+        'No puedes comprar entradas siendo administrador'
       );
       return;
     }
@@ -69,7 +72,7 @@ export class EventDetailComponent implements OnInit {
     });
     buyDialogRef.afterClosed().subscribe((saleId) => {
       if (saleId) {
-        alert('Compra exitosa!' + '\n' + 'Voucher generado');
+        this.notifications.success('Compra exitosa!', 'Voucher generado');
         const voucherDialogRef = this.matDialog.open(VoucherDialogComponent, {
           data: { saleId },
         });

@@ -15,6 +15,7 @@ import {
 } from './app.interceptor';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,5 +26,6 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([loggerInterceptor, jwtInterceptor, loadingInterceptor])
     ),
     importProvidersFrom(SimpleNotificationsModule.forRoot(), NgxSpinnerModule),
+    provideCharts(withDefaultRegisterables()),
   ],
 };

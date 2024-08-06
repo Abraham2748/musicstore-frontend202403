@@ -3,6 +3,8 @@
     <canvas baseChart [data]="pieChartData" [type]="pieChartType"> </canvas>
   </div>
 </div>
-<div style="display: flex; justify-content: center">
+<div style="display: flex; justify-content: center; gap: 8px">
   <button (click)="loadRealData()">Cargar datos</button>
+  <button (click)="downloadPDF()">Descargar PDF</button>
+  <button (click)="openPDF()">Abrir PDF</button>
 </div>

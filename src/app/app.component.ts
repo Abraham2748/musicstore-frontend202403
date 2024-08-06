@@ -11,6 +11,7 @@ import {
   SimpleNotificationsModule,
 } from 'angular2-notifications';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -25,4 +26,9 @@ export class AppComponent {
     position: ['top', 'right'],
     timeOut: 3000,
   };
+
+  constructor() {
+    const authService = inject(AuthService);
+    authService.verifyLocalStorage();
+  }
 }
